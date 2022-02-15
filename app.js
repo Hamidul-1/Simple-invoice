@@ -16,6 +16,18 @@ const addButton = document.getElementById('add-details-btn').addEventListener('c
   const itemPrice = document.getElementById('item-price-input');
   const itemQuantity = document.getElementById('item-quantity-input');
   console.log(itemName.value, itemPrice.value, itemQuantity.value);
+
+  if (
+    itemName.value == "" ||
+    itemPrice.value < 0 ||
+    itemQuantity.value < 0 ||
+    itemPrice.value == "" ||
+    itemQuantity.value == ""
+  ) 
+  {
+    console.log("sorry");
+    return;
+  }
   
   {/* <tr>
     <th >1</th>
@@ -26,8 +38,10 @@ const addButton = document.getElementById('add-details-btn').addEventListener('c
   const totalPrice = parseFloat(itemPrice.value) * parseFloat(itemQuantity.value);
 
   console.log('total..............',totalPrice);
-  const tr = document.createElement('tr');
-  const th = document.createElement('th');
+  // const tr = document.createElement('tr');
+  const tr = element('tr');
+  // const th = document.createElement('th');
+  const th = element('th');
   const td1 = document.createElement('td');
   const td2 = document.createElement('td');
   const td3 = document.createElement('td');
@@ -47,6 +61,11 @@ const addButton = document.getElementById('add-details-btn').addEventListener('c
   totalCalculation();
 })
 
+function element(parameter){
+  return document.createElement(parameter);
+}
+
+
 function totalCalculation(){
   const subTotal = calculateSubTotal()
 
@@ -64,11 +83,10 @@ function calculateSubTotal(){
   let subTotal = 0;
   const cost = document.getElementsByClassName('item-total');
   for (let i = 0; i <cost.length; i++){
-    const element = cost[i];
+    const element = cost[i]; //<td class='item-total'>35</td>
     const price = parseInt(element.innerText)
     subTotal = subTotal + price;
   }
-  
   return subTotal;
 }
 
